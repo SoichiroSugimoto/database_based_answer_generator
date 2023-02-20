@@ -1,25 +1,22 @@
-FROM ubuntu:20.04
+FROM python:3.9
 
-# 日本設定
-ENV TZ Asia/Tokyo
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-ENV LANG ja_JP.UTF-8
+# mecabの導入
+RUN apt-get -y update && \
+  apt-get -y upgrade && \
+  apt-get install -y mecab && \
+  apt-get install -y libmecab-dev && \
+  apt-get install -y mecab-ipadic-utf8 && \
+  apt-get install -y git && \
+  apt-get install -y make && \
+  apt-get install -y curl && \
+  apt-get install -y xz-utils && \
+  apt-get install -y file && \
+  apt-get install -y sudo
 
-# パッケージインストール
-RUN apt update -yqq && \
-    apt install -y --no-install-recommends \
-    build-essential curl ca-certificates \
-    file git locales sudo \
-    mecab libmecab-dev mecab-ipadic-utf8 && \
-    locale-gen ja_JP.UTF-8 && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# mecab-ipadic-neologdインストール
-WORKDIR /tmp
+# mecab-ipadic-NEologdのインストール
 RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git && \
-    ./mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -y && \
-    sudo mv /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd /var/lib/mecab/dic/ && \
-    sed -i 's/debian/mecab-ipadic-neologd/' /etc/mecabrc && \
-    rm -rf ./mecab-ipadic-neologd && \
-    echo "完了"
+  cd mecab-ipadic-neologd && \
+  ./bin/install-mecab-ipadic-neologd -n -y && \
+  echo dicdir = `mecab-config --dicdir`"/mecab-ipadic-neologd">/etc/mecabrc && \
+  sudo cp /etc/mecabrc /usr/local/etc && \
+  cd ..
