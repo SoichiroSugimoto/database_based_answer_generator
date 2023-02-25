@@ -7,7 +7,7 @@ SUMMARY_REQUEST_JP = "という質問に対する回答を以下の文章を要�
 
 def ai_summarize(original_prompt, resource_text):
   prompt = "「" + original_prompt + "」" + SUMMARY_REQUEST_JP + "\n\n" + resource_text
-  openai_prompt(prompt)
+  return (openai_prompt(prompt))
 
 
 def openai_prompt(prompt):
