@@ -3,6 +3,13 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.Model.list()
 
+SUMMARY_REQUEST_JP = "という質問に対する回答を以下の文章を要約して作成してください。"
+
+def ai_summarize(original_prompt, resource_text):
+  prompt = "「" + original_prompt + "」" + SUMMARY_REQUEST_JP + "\n\n" + resource_text
+  openai_prompt(prompt)
+
+
 def openai_prompt(prompt):
   openai_request_headers = {
       "Content-Type": "application/json",
