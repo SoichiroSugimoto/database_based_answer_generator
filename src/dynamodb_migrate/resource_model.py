@@ -17,3 +17,4 @@ class Resource(Model):
   sentence_id = UnicodeAttribute(hash_key=True)
   sentence = UnicodeAttribute()
   sentence_type = UnicodeAttribute()
+  words_set_array = UnicodeSetAttribute()
