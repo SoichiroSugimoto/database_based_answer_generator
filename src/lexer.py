@@ -15,6 +15,6 @@ def get_noun(prompt):
 	lexer_array = lexer(prompt)
 	noun_array = []
 	for la in lexer_array:
-		if (la[0] != "EOS" and la[4] == "名詞-普通名詞-一般"):
+		if (la[0] != "EOS" and la[4] == NOUN):
 			noun_array.append(la[0])
 	print(noun_array)
