@@ -1,8 +1,11 @@
 import os
 import json
 import csv
-# import boto3
+import boto3
 import MeCab
+
+dynamodb = boto3.resource('dynamodb', region_name = 'ap-northeast-1')
+resources = dynamodb.Table('Resource')
 
 def lambda_handler(event, context):
   text = "静かなる鏡のごとき湖が眠れるアリチアの森"
