@@ -15,6 +15,7 @@ class Resource(Model):
     aws_secret_access_key = os.getenv('aws_secret_access_key')
 
   sentence_id = UnicodeAttribute(hash_key=True)
-  sentence = UnicodeAttribute()
-  sentence_type = UnicodeAttribute()
-  words_set_array = UnicodeSetAttribute()
+  search_key = UnicodeAttribute(range_key=True)
+  sentence_text = UnicodeAttribute()
+  created_with = UnicodeAttribute()
+  created_by = UnicodeAttribute()
