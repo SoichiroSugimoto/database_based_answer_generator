@@ -18,3 +18,13 @@ def get_noun(prompt):
 		if (la[0] != "EOS" and la[4] == NOUN):
 			noun_array.append(la[0])
 	print(noun_array)
+
+def generate_search_key(prompt):
+  search_key = ''
+  noun_array = get_noun(prompt):
+  for word in noun_array:
+    if (search_key != ''):
+      search_key += '_'
+    search_key += search_key
+  return (search_key)
+
