@@ -10,4 +10,5 @@ RUN pip install jupyterlab
 RUN pip install mecab-python3
 RUN pip install unidic-lite
 
-COPY src .
+RUN mkdir app
+COPY src ./app/
