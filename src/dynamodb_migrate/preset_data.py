@@ -1,13 +1,8 @@
 import json
+from .. import utils
 from resource_model import Resource
 
-n = 0
-attr = None
-
-with open('preset_resource.json', 'r',encoding="utf-8") as f:
-  preset_resource = json.load(f)
-
-for pr in preset_resource:
-  attr = None
-  n += 1
-  Resource(sentence_id=n, sentence=json.dumps(preset_resource[n]), sentence_type=attr).save()
+with open('preset_resource.csv', 'r') as f:
+  reader = csv.reader(f)
+  for line in reader:
+    utils.insert_resource_record(line[2], line[1], line[0])
