@@ -12,19 +12,19 @@ def lexer(text):
   return (lexer_array)
 
 def get_noun(text):
-	lexer_array = lexer(text)
-	noun_array = []
-	for la in lexer_array:
-		if (la[0] != "EOS" and la[4] == NOUN):
-			noun_array.append(la[0])
-	print(noun_array)
+  lexer_array = lexer(text)
+  noun_array = []
+  for la in lexer_array:
+    if (la[0] != "EOS" and la[4] == NOUN):
+      noun_array.append(la[0])
+  return (noun_array)
 
 def generate_search_key(text):
   search_key = ''
-  noun_array = get_noun(text):
+  noun_array = get_noun(text)
   for word in noun_array:
     if (search_key != ''):
       search_key += '_'
-    search_key += search_key
+    search_key += word
   return (search_key)
 
